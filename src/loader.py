@@ -9,9 +9,9 @@ def load(path_to_image):
     img_vector = []
     for row in img_matrix:
         for rgb_pixel in row:
-            grayscale_pixel = rgb_pixel[0] / 255
+            grayscale_pixel = abs((rgb_pixel[0] / 255) - 1)
             img_vector.append(grayscale_pixel)
-    row_vector = np.asarray(img_vector)
+    row_vector = np.asarray(img_vector, dtype=np.float64)
     return np.reshape(row_vector, (len(row_vector), 1))
 
 
@@ -29,5 +29,5 @@ def load_training_data():
 def label_for(number):
     label = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     label[number] = 1
-    row_vector = np.asarray(label)
+    row_vector = np.asarray(label, dtype=np.float64)
     return np.reshape(row_vector, (len(row_vector), 1))
